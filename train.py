@@ -207,7 +207,8 @@ if __name__ == "__main__":
                 ) and n_keyframes - last_reboot > 50
             if needs_reboot:
                 # Reboot: run mini BA on the last 8 keyframes
-                bs_kfs = scene_model.keyframes[-8:]
+                # bs_kfs = scene_model.keyframes[-8:]
+                bs_kfs = scene_model.keyframes[-args.num_keyframes_miniba_bootstrap:]
                 bootstrap_desc_kpts = [bs_kf.desc_kpts for bs_kf in bs_kfs]
                 in_Rts = torch.stack([kf.get_Rt() for kf in bs_kfs])
                 Rts, _, final_residual = pose_initializer.initialize_bootstrap(
